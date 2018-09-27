@@ -1,6 +1,7 @@
 // Import contact model
 Contact = require('./Model');
 
+
 // Handle index actions
 exports.index = function (req, res) {
     Contact.get(function (err, contacts) {

@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
+let config = require('config');
+let db = require('../Database/mongodb');
 
 // Setup schema
 var contactSchema = mongoose.Schema({
@@ -19,7 +21,7 @@ var contactSchema = mongoose.Schema({
 }, { collection: config.mongodb.collection });
 
 // Export Contact model
-var Contact = module.exports = mongoose.model('contact', contactSchema);
+var Contact = module.exports = mongoose.model(config.mongodb.collection, contactSchema);
 
 
 module.exports.get = function (callback, limit) {

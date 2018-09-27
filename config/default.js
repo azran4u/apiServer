@@ -1,16 +1,14 @@
-let config = {
-    env: 'development',
+module.exports = {
+    env: "development",
     mongodb: {
-        server: 'mongodb://localhost',
-        port: '27107',
+        server: "mongodb://localhost",
+        port: "27107",
         username: "root",
         password: "123456",
         database: "contacts",
         collection: "contacts"
     },
-    webserver: {
+    webServer: {
         port: process.env.PORT || 8080
     }
 };
-
-module.exports = config;

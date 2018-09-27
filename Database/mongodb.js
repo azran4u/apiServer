@@ -1,6 +1,8 @@
 // Import Mongoose
 let mongoose = require('mongoose');
+let config = require('config');
 
+mongoose.set('debug', true);
 // Connect to Mongoose and set connection variable
 mongoose.connect(config.mongodb.server+"/"+config.mongodb.database , { useNewUrlParser: true } );
 // Get Mongoose to use the global promise library
