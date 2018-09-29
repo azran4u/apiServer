@@ -10,19 +10,32 @@ let options = {
         json: true,
         maxsize: 5242880, // 5MB
         maxFiles: 5,
-        colorize: true
+        colorize: true,
+        timestamp: true
     },
     console: {
         level: 'info',
         handleExceptions: true,
         json: false,
         colorize: true,
+        format: winston.format.combine(
+            winston.format.timestamp(),
+            winston.format.colorize({ all: true }),
+            winston.format.align(),
+            winston.format.printf((info) => {
+                const {
+                    timestamp, level, message, ...args
+                } = info;
+
+                // const ts = timestamp.slice(0, 19).replace('T', ' ');
+                return `${timestamp} ${level}: ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
+            }),
+        )
     },
 };
 
 const logger = winston.createLogger({
     level: 'info',
-    format: winston.format.json(),
     transports: [
         new winston.transports.File(options.file),
     ]
