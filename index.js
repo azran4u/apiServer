@@ -22,8 +22,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Integrate morgan into winston
-logger.info("index.js");
-
 app.use(morgan('tiny', { stream: logger.stream }));
 
 // Send message for default URL
@@ -33,6 +31,6 @@ app.use('/api', apiRoutes);
 
 // Launch app to listen to specified port
 app.listen(config.webserver.port, function () {
-    console.log("Running API Server on port " + config.webserver.port);
+    logger.info("Running API Server on port " + config.webserver.port);
 });
 

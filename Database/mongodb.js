@@ -1,8 +1,12 @@
 // Import Mongoose
 let mongoose = require('mongoose');
 let config = require('config');
+let logger = require('../Logging/logging');
 
-mongoose.set('debug', true);
+// integrate mongoose with winstone
+mongoose.set('debug', function (coll, method, query, doc) {
+    logger.info("mongoose " + coll + " " + method);
+});
 // Connect to Mongoose and set connection variable
 mongoose.connect(config.mongodb.server+"/"+config.mongodb.database , { useNewUrlParser: true } );
 // Get Mongoose to use the global promise library

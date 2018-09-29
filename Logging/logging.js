@@ -5,7 +5,7 @@ let winston = require('winston');
 let options = {
     file: {
         level: 'info',
-        filename: `./logs/combined.log`,
+        filename: `./Logging/logs/combined.log`,
         handleExceptions: true,
         json: true,
         maxsize: 5242880, // 5MB
@@ -21,7 +21,10 @@ let options = {
 };
 
 const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
     transports: [
+        new winston.transports.File(options.file),
     ]
 });
 
@@ -36,7 +39,5 @@ logger.stream = {
 };
 
 logger.exitOnError = false;
-
-logger.info('test');
 
 module.exports = logger;
